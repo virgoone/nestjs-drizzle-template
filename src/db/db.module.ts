@@ -1,7 +1,7 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { DBModuleAsyncOptions, DBModuleOptions } from './interface/db.interface';
+import { DynamicModule, Module } from '@nestjs/common'
 
-import { DBCoreModule } from './db-core.module';
+import { DBCoreModule } from './db-core.module'
+import { DBModuleAsyncOptions, DBModuleOptions } from './interface/db.interface'
 
 @Module({})
 export class DBModule {
@@ -9,13 +9,13 @@ export class DBModule {
     return {
       module: DBModule,
       imports: [DBCoreModule.register(options)],
-    };
+    }
   }
 
   static forRootAsync(options: DBModuleAsyncOptions): DynamicModule {
     return {
       module: DBModule,
       imports: [DBCoreModule.forRootAsync(options)],
-    };
+    }
   }
 }

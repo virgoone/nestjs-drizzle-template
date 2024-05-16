@@ -1,15 +1,21 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoggerModule } from 'nestjs-pino';
-import { v4 as uuid } from 'uuid';
-import { MulterModule } from '@nestjs/platform-express';
-import configs from '@/config';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { AppInterceptor } from './app.interceptor';
-import { InterceptorModule } from '@/interceptor/interceptor.module';
+import { LoggerModule } from 'nestjs-pino'
+import { v4 as uuid } from 'uuid'
+
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+import { MulterModule } from '@nestjs/platform-express'
+import { TerminusModule } from '@nestjs/terminus'
+import { ThrottlerModule } from '@nestjs/throttler'
+
+import configs from '@/config'
+import { HealthPublicController } from '@/health/controller/health.controller'
+import { HealthModule } from '@/health/health.module'
+import { InterceptorModule } from '@/interceptor/interceptor.module'
+
+import { AppController } from './app.controller'
+import { AppInterceptor } from './app.interceptor'
+import { AppService } from './app.service'
 
 @Module({
   imports: [
@@ -30,9 +36,9 @@ import { InterceptorModule } from '@/interceptor/interceptor.module';
             : undefined,
 
         genReqId: (req: any) => {
-          const id = req.id || uuid();
+          const id = req.id || uuid()
 
-          return id;
+          return id
         },
       },
     }),
@@ -50,6 +56,7 @@ import { InterceptorModule } from '@/interceptor/interceptor.module';
     //   //useFactory: async (configService: ConfigService) => configService.get('redis'),
     //   inject: [ConfigService],
     // }),
+    TerminusModule,
     InterceptorModule,
     ThrottlerModule.forRoot({
       throttlers: [
@@ -60,8 +67,9 @@ import { InterceptorModule } from '@/interceptor/interceptor.module';
       ],
     }),
     MulterModule.register(),
+    HealthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthPublicController],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: AppInterceptor },
     AppService,

@@ -1,9 +1,12 @@
+import { Response } from 'express'
+
 import { HttpService } from '@nestjs/axios'
 import { ExecutionContext, Injectable, Logger } from '@nestjs/common'
-import { HttpInterceptorAction } from './dto/http-interceptor.dto'
-import { Response } from 'express'
 import { ConfigService } from '@nestjs/config'
+
 import { IRequest } from '@/utils/request'
+
+import { HttpInterceptorAction } from './dto/http-interceptor.dto'
 
 @Injectable()
 export class HttpInterceptorService {

@@ -1,8 +1,9 @@
 import bytes from 'bytes'
 import ms from 'ms'
 
-import { seconds } from '@/utils/time'
 import { registerAs } from '@nestjs/config'
+
+import { seconds } from '@/utils/time'
 
 export default registerAs(
   'request',

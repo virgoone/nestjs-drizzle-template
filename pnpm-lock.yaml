@@ -121,6 +121,9 @@ dependencies:
     version: 3.23.8
 
 devDependencies:
+  '@ianvs/prettier-plugin-sort-imports':
+    specifier: ^4.2.1
+    version: 4.2.1(prettier@3.2.5)
   '@nestjs/cli':
     specifier: ^10.0.0
     version: 10.3.2(esbuild@0.19.12)
@@ -1079,6 +1082,26 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.3:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    dev: true
+
+  /@ianvs/prettier-plugin-sort-imports@4.2.1(prettier@3.2.5):
+    resolution: {integrity: sha512-NKN1LVFWUDGDGr3vt+6Ey3qPeN/163uR1pOPAlkWpgvAqgxQ6kSdUf1F0it8aHUtKRUzEGcK38Wxd07O61d7+Q==}
+    peerDependencies:
+      '@vue/compiler-sfc': 2.7.x || 3.x
+      prettier: 2 || 3
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
+    dependencies:
+      '@babel/core': 7.24.5
+      '@babel/generator': 7.24.5
+      '@babel/parser': 7.24.5
+      '@babel/traverse': 7.24.5
+      '@babel/types': 7.24.5
+      prettier: 3.2.5
+      semver: 7.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@isaacs/cliui@8.0.2:

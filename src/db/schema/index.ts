@@ -1,11 +1,11 @@
 import {
-  pgTable,
-  serial,
-  varchar,
-  timestamp,
   integer,
   jsonb,
-} from 'drizzle-orm/pg-core';
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core'
 
 export const User = pgTable('user', {
   id: serial('id').primaryKey(),
@@ -14,4 +14,4 @@ export const User = pgTable('user', {
   department: varchar('department', { length: 20 }),
   createTime: timestamp('create_time').defaultNow(),
   updateTime: timestamp('update_time').defaultNow(),
-});
+})

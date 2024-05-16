@@ -1,19 +1,17 @@
+import { Client } from 'pg'
+
 import {
   DynamicModule,
   Global,
-  Module,
   Inject,
+  Module,
   OnModuleDestroy,
-} from '@nestjs/common';
-import {
-  DBModuleAsyncOptions,
-  DBModuleOptions,
-} from './interface/db.interface';
-import { createAsyncClientOptions, createClient } from './db.provider';
-import { Client } from 'pg';
+} from '@nestjs/common'
 
-import { DB_MODULE_OPTIONS, DB_CLIENT } from './constants';
-import { DBService } from './service/db.service';
+import { DB_CLIENT, DB_MODULE_OPTIONS } from './constants'
+import { createAsyncClientOptions, createClient } from './db.provider'
+import { DBModuleAsyncOptions, DBModuleOptions } from './interface/db.interface'
+import { DBService } from './service/db.service'
 
 @Global()
 @Module({
@@ -36,7 +34,7 @@ export class DBCoreModule implements OnModuleDestroy {
         { provide: DB_MODULE_OPTIONS, useValue: options },
       ],
       exports: [DBService],
-    };
+    }
   }
 
   static forRootAsync(options: DBModuleAsyncOptions): DynamicModule {
@@ -45,18 +43,18 @@ export class DBCoreModule implements OnModuleDestroy {
       imports: options.imports,
       providers: [createClient(), createAsyncClientOptions(options)],
       exports: [DBService],
-    };
+    }
   }
 
   onModuleDestroy() {
     const closeConnection = (client: Client) => async (options) => {
       if (client && !options.keepAlive) {
-        await client.end();
+        await client.end()
       }
-    };
+    }
 
-    const closeClientConnection = closeConnection(this.dbClient);
+    const closeClientConnection = closeConnection(this.dbClient)
 
-    closeClientConnection(this.options);
+    closeClientConnection(this.options)
   }
 }

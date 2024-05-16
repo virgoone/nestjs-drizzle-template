@@ -1,0 +1,8 @@
+*.log
+.dev
+public
+dist
+build
+coverage
+.github
+.git
